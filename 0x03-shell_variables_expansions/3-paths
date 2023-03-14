@@ -1,0 +1,2 @@
+#!/bin/bash
+find -type d | tr -s ':' | wc -l
