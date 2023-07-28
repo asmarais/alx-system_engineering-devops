@@ -3,5 +3,5 @@
 pid=$(pgrep 4-to_infinity_and_beyond)
 if [ -n "$pid" ]
 then
-    kill -s "$pid"
+    kill -s SIGKILL "$pid"
 fi
