@@ -1,0 +1,4 @@
+# ssh config file
+Host 100.25.188.65
+      IdentityFile ~/.ssh/school
+      PasswordAuthentication no
