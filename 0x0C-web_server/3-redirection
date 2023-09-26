@@ -10,8 +10,8 @@ echo "server {
       root   /etc/nginx/html;
       index  index.html;
       location /redirect_me {
-        return 301 www.linkedin.com;
+        return 301 https://www.freecodecamp.org/learn/front-end-development-libraries;
       }
-}" > /etc/nginx/sites-available/default
+}" | sudo tee /etc/nginx/sites-available/default
 sudo service nginx restart
 
