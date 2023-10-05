@@ -3,23 +3,13 @@
 
 
 function display_info() {
-    local domain="$1"
-    local subdomain="$2"
-
     if [ -z "$subdomain" ]; then
         subdomains=("www" "lb-01" "web-01" "web-02")
     else
-        subdomains=("$subdomain")
+        subdomains=("$2")
     fi
     for sub in "${subdomains[@]}"; do
-        dns_info=$(dig +short "$sub.$domain" | awk '{ printf $0 " " }')
-        record_type=$(echo "$dns_info" | awk '{ print $2 }')
-        destination=$(echo "$dns_info" | awk '{ print $1 }')
-        echo "The subdomain $sub is a $record_type record and points to $destination"
-    done
+    echo -n "The subdomain $sub"
+    dig "$sub.$1" | grep -A1 'ANSWER SECTION:' | awk -F '{ print " is a " $4 " record and points to " $5}'
 }
-
-domain="$1"
-subdomain="$2"
-# Call the display_info function to display subdomain information
-display_info "$domain" "$subdomain"
+display_info
