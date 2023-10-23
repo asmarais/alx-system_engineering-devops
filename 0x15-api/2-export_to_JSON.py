@@ -1,19 +1,19 @@
 #!/usr/bin/python3
 """export data in the json format."""
-
-
-import requests
 import json
-import csv
+import requests
+
 
 def to_do_list(id):
     """retrieve information about employees """
-    response = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(id))
-    data1 = response.json()
+    url = "https://jsonplaceholder.typicode.com/users/"
+    res = requests.get(url + "{}".format(id))
+    data1 = res.json()
     EMPLOYEE_NAME = data1["username"]
-    response = requests.get("https://jsonplaceholder.typicode.com/todos?userId={}".format(id))
+    url1 = "https://jsonplaceholder.typicode.com/todos/?userId="
+    response = requests.get(url1 + "{}".format(id))
     data = response.json()
-    row =[]
+    row = []
     for i in data:
         new_dict = {}
         new_dict['username'] = EMPLOYEE_NAME
@@ -24,12 +24,12 @@ def to_do_list(id):
     final_dict = {}
     final_dict[id] = row
     json_obj = json.dumps(final_dict)
-    file ="{}.json".format(id)
+    file = str(id) + ".json"
 
     with open(file,  "w") as f:
         f.write(json_obj)
 
-    
+
 if __name__ == "__main__":
     import sys
     employee_id = int(sys.argv[1])

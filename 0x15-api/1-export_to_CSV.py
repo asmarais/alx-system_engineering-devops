@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 """export data in the CSV format."""
-
-
-import requests
-import json
 import csv
+import json
+import requests
+
 
 def to_do_list(id):
     """retrieve information about employees """
-    response = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(id))
-    data1 = response.json()
+    url = "https://jsonplaceholder.typicode.com/users/"
+    res = requests.get(url + "{}".format(id))
+    data1 = res.json()
     EMPLOYEE_NAME = data1["username"]
-    response = requests.get("https://jsonplaceholder.typicode.com/todos?userId={}".format(id))
+    url1 = "https://jsonplaceholder.typicode.com/todos/?userId="
+    response = requests.get(url1 + "{}".format(id))
     data = response.json()
 
     csv_file = "{}.csv".format(id)
@@ -28,8 +29,8 @@ def to_do_list(id):
 
             writer.writerow(row)
 
+
 if __name__ == "__main__":
     import sys
     employee_id = int(sys.argv[1])
     to_do_list(employee_id)
-
