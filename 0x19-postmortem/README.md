@@ -1,5 +1,5 @@
 # postmortem
-
+![Project Image](https://github.com/asmarais/alx-system_engineering-devops/blob/master/0x19-postmortem/meme.jpg)
 ## Objective:
 This postmortem aims to analyze the recent incident where our website experienced 500 Internal Server Errors, identify the root causes, and outline action items to prevent similar occurrences in the future.
 
